@@ -253,8 +253,9 @@ fn main() {
     println!("La valeur de x est : {}", x);
 }
 ```
-
 Dans cet exemple, `x` est une variable immuable qui contient la valeur `5`. Si vous essayez de modifier la valeur de `x`, vous obtiendrez une erreur de compilation.
+
+**Exercice** : Modifiez le programme ci-dessus pour afficher la valeur de `x` après l'avoir modifiée.
 
 Par exemple, le code suivant générera une erreur de compilation :
 
@@ -1676,7 +1677,7 @@ Voyons en détail ce code :
 - `let mut x = 5;` : déclare une variable `x` et l'initialise avec la valeur `5`.
 - l`et emprunt = &mut x;` : crée un emprunt mutable à la valeur de `x`.
 - `*emprunt += 1;` : modifie la valeur de `x` à travers l'emprunt.
-- `*` : est l'opérateur de déréférencement qui permet d'accéder à la valeur de l'emprunt.
+- `*` : est l'opérateur de déréférencement qui permet d'accéder à la valeur de l'emprunt. Cela signifie que l'emprunt ne possède pas la valeur de `x`, mais peut la modifier.
 - `println!("La valeur de x est : {}", x);` : affiche la valeur de `x`.
 
 Les règles suivantes s'appliquent aux emprunts mutables :
@@ -1973,6 +1974,12 @@ fn main() {
     etat.afficher();
 }
 ```
+Étudions en détail ce code :
+
+- `enum Etat { Inactif, Actif, EnPanne, }` : déclare une énumération `Etat` avec les variantes `Inactif`, `Actif` et `EnPanne`.
+- `impl Etat { fn afficher(&self) { match self { Etat::Inactif => println!("L'appareil est inactif"), Etat::Actif => println!("L'appareil est actif"), Etat::EnPanne => println!("L'appareil est en panne"), } } }` : implémente l'énumération `Etat` avec une méthode `afficher` pour afficher l'état de l'appareil.
+- `let etat = Etat::Actif;` : crée une instance de l'énumération `Etat` avec l'état `Actif`.
+- `etat.afficher();` : appelle la méthode `afficher` pour afficher l'état de l'appareil.
 
 # Gestion des erreurs
 
@@ -2233,7 +2240,7 @@ Voyons les détails de ce code :
 
 **Modification**
 
-Vous pouvez ajouter des éléments à un vecteur en utilisant la méthode **push** :
+Vous pouvez ajouter des éléments à un vecteur en utilisant d'autres méthodes telles que :
 
 - **push** : ajoute un élément à la fin du vecteur.
 
@@ -2243,7 +2250,7 @@ fn main() {
     vecteur.push(6); // Ajout d'une valeur au vecteur.
 
     for element in &vecteur { // Pour chaque élément du vecteur...
-        println!("Le vecteur est : {}", element); // Affichage de la valeur de l'élément.
+        println!("Le vecteur est : {}", element); // Résultat : 1, 2, 3, 4, 5, 6
     }
 }
 ```
@@ -2256,8 +2263,8 @@ fn main() {
     let dernier_element = vecteur.pop(); // Suppression du dernier élément du vecteur.
 
     match dernier_element {
-        Some(valeur) => println!("Le dernier élément est : {}", valeur),
-        None => println!("Aucun élément trouvé"),
+        Some(valeur) => println!("Le dernier élément est : {}", valeur), // Résultat : 5
+        None => println!("Aucun élément trouvé"), // Résultat si aucun élément n'est trouvé.
     }
 }
 ```
@@ -2269,7 +2276,7 @@ fn main() {
     let mut vecteur = vec![1, 2, 3, 4, 5]; // Création d'un vecteur avec des valeurs.
     vecteur.insert(2, 6); // Insertion de la valeur 6 à l'index 2.
 
-    println!("{:?}", vecteur); // Affichage du vecteur.
+    println!("{:?}", vecteur); // Réultat : [1, 2, 6, 3, 4, 5]
 }
 ```
 
@@ -2280,7 +2287,7 @@ fn main() {
     let mut vecteur = vec![1, 2, 3, 4, 5]; // Création d'un vecteur avec des valeurs.
     let element = vecteur.remove(2); // Suppression de l'élément à l'index 2.
 
-    println!("L'élément supprimé est : {}", element); // Affichage de la valeur de l'élément supprimé.
+    println!("L'élément supprimé est : {}", element); // Résultat : 3
 }
 ```
 
@@ -2291,7 +2298,7 @@ fn main() {
     let mut vecteur = vec![1, 2, 3, 4, 5]; // Création d'un vecteur avec des valeurs.
     vecteur.reverse(); // Inversion des éléments du vecteur.
 
-    println!("{:?}", vecteur); // Affichage du vecteur inversé.
+    println!("{:?}", vecteur); // Réultat : [5, 4, 3, 2, 1]
 }
 ```
 
@@ -2303,7 +2310,7 @@ fn main() {
     let vecteur2 = vec![4, 5, 6]; // Création d'un autre vecteur avec des valeurs.
     vecteur1.append(&mut vecteur2); // Ajout des éléments du vecteur2 au vecteur1.
 
-    println!("{:?}", vecteur1); // Affichage du vecteur1.
+    println!("{:?}", vecteur1); // Réultat : [1, 2, 3, 4, 5, 6]
 }
 ```
 
@@ -2315,7 +2322,7 @@ fn main() {
     let tableau = [4, 5, 6]; // Création d'un tableau avec des valeurs.
     vecteur.extend(&tableau); // Ajout des éléments du tableau au vecteur.
 
-    println!("{:?}", vecteur); // Affichage du vecteur.
+    println!("{:?}", vecteur); // Résultat : [1, 2, 3, 4, 5, 6]
 }
 ```
 
@@ -2326,7 +2333,7 @@ fn main() {
     let mut vecteur = vec![1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5]; // Création d'un vecteur avec des valeurs.
     vecteur.dedup(); // Suppression des doublons.
 
-    println!("{:?}", vecteur); // Affichage du vecteur.
+    println!("{:?}", vecteur); // Résultat : [1, 2, 3, 4, 5]
 }
 ```
 
@@ -2337,7 +2344,7 @@ fn main() {
     let mut vecteur = vec![1, 2, 3, 4, 5]; // Création d'un vecteur avec des valeurs.
     vecteur.resize(10, 0); // Redimensionnement du vecteur pour contenir 10 éléments avec la valeur 0.
 
-    println!("{:?}", vecteur); // Affichage du vecteur.
+    println!("{:?}", vecteur); // Résultat : [1, 2, 3, 4, 5, 0, 0, 0, 0, 0]
 }
 ```
 
@@ -2348,7 +2355,7 @@ fn main() {
     let mut vecteur = vec![1, 2, 3, 4, 5]; // Création d'un vecteur avec des valeurs.
     vecteur.truncate(3); // Troncature du vecteur pour contenir 3 éléments.
 
-    println!("{:?}", vecteur); // Affichage du vecteur.
+    println!("{:?}", vecteur); // Réultat : [1, 2, 3]
 }
 ```
 
@@ -2362,7 +2369,7 @@ fn main() {
     let element = vecteur.get(2); // Récupération de l'élément à l'index 2.
 
     match element {
-        Some(valeur) => println!("L'élément est : {}", valeur), // Affichage de la valeur de l'élément.
+        Some(valeur) => println!("L'élément est : {}", valeur), // Résultat : 3
         None => println!("Aucun élément trouvé"), // Affichage si aucun élément n'est trouvé.
     }
 }
@@ -2377,12 +2384,12 @@ fn main() {
     let dernier = vecteur.last(); // Récupération du dernier élément.
 
     match premier {
-        Some(valeur) => println!("Le premier élément est : {}", valeur), // Affichage de la valeur du premier élément.
+        Some(valeur) => println!("Le premier élément est : {}", valeur), // Résultat : 1
         None => println!("Aucun élément trouvé"), // Affichage si aucun élément n'est trouvé.
     }
 
     match dernier {
-        Some(valeur) => println!("Le dernier élément est : {}", valeur), // Affichage de la valeur du dernier élément.
+        Some(valeur) => println!("Le dernier élément est : {}", valeur), // Résultat : 5
         None => println!("Aucun élément trouvé"), // Affichage si aucun élément n'est trouvé.
     }
 }
@@ -2397,7 +2404,7 @@ fn main() {
     let vecteur = vec![1, 2, 3, 4, 5]; // Création d'un vecteur avec des valeurs.
 
     for element in vecteur.iter() { // Pour chaque élément du vecteur...
-        println!("Le vecteur est : {}", element); // Affichage de la valeur de l'élément.
+        println!("Le vecteur est : {}", element); // Résultat : 1, 2, 3, 4, 5
     }
 }
 ```
@@ -2411,9 +2418,10 @@ fn main() {
     for element in vecteur.iter_mut() { // Pour chaque élément mutable du vecteur...
         *element += 1; // Incrémentation de la valeur de l'élément.
     }
-
-    for element in &vecteur { // Pour chaque élément du vecteur...
-        println!("Le vecteur est : {}", element); // Affichage de la valeur de l'élément.
+  
+    // Pour chaque élément du vecteur...
+    for element in &vecteur { 
+        println!("Le vecteur est : {}", element); // Résultat : 2, 3, 4, 5, 6
     }
 }
 ```
@@ -2424,8 +2432,8 @@ fn main() {
 fn main() {
     let vecteur = vec![1, 2, 3, 4, 5]; // Création d'un vecteur avec des valeurs.
 
-    for element in vecteur.into_iter() { // Pour chaque élément du vecteur...
-        println!("Le vecteur est : {}", element); // Affichage de la valeur de l'élément.
+    for element in vecteur.into_iter() { 
+        println!("Le vecteur est : {}", element); // Réultat : 1, 2, 3, 4, 5
     }
 }
 ```
@@ -2439,7 +2447,7 @@ fn main() {
     let vecteur = vec![1, 2, 3, 4, 5]; // Création d'un vecteur avec des valeurs.
     let contient = vecteur.contains(&3); // Vérification si le vecteur contient la valeur 3.
 
-    println!("Le vecteur contient la valeur 3 : {}", contient); // Affichage si le vecteur contient la valeur 3 ou non.
+    println!("Le vecteur contient la valeur : {}", contient); // Affichage la valeur 3 ou non.
 }
 ```
 
@@ -2448,9 +2456,9 @@ fn main() {
 ```rust
 fn main() {
     let mut vecteur = vec![5, 3, 1, 2, 4]; // Création d'un vecteur avec des valeurs.
-    vecteur.sort(); // Tri des éléments du vecteur.
+    vecteur.sort(); // Tri des éléments du vecteur et les classe dans l'ordre croissant.
 
-    println!("{:?}", vecteur); // Affichage du vecteur trié.
+    println!("{:?}", vecteur); // Résultat : [1, 2, 3, 4, 5]
 }
 ```
 
@@ -2459,7 +2467,7 @@ fn main() {
     let mut vecteur = vec![5, 3, 1, 2, 4]; // Création d'un vecteur avec des valeurs.
     vecteur.sort_by(|a, b| b.cmp(a)); // Tri des éléments du vecteur dans l'ordre inverse.
 
-    println!("{:?}", vecteur); // Affichage du vecteur trié dans l'ordre inverse.
+    println!("{:?}", vecteur); // Résultat : [5, 4, 3, 2, 1]
 }
 ```
 
@@ -2489,12 +2497,14 @@ fn main() {
 ```rust
 fn main() {
     let vecteur = vec!["un", "deux", "trois", "quatre", "cinq"]; // Création d'un vecteur avec des valeurs.
-    let index = vecteur.binary_search_by_key(&"quatre", |element| element.len()); // Recherche de la valeur "quatre" dans le vecteur.
+  
+    // Recherche de la valeur "quatre" dans le vecteur.
+    let index = vecteur.binary_search_by_key(&"quatre", |element| element.len()); 
 
     match index {
-        Ok(i) => println!("La valeur 'quatre' est à l'index : {}", i), // Affichage de l'index de la valeur "quatre".
-        Err(_) => println!("La valeur 'quatre' n'est pas trouvée"), // Affichage si la valeur "quatre" n'est pas trouvée.
-    }
+        // Affichage de l'index de la valeur "quatre".
+        Ok(i) => println!("La valeur 'quatre' est à l'index : {}", i), 
+        Err(_) => println!("La valeur 'quatre' n'est pas trouvée"), 
 }
 ```
 
@@ -2507,7 +2517,7 @@ fn main() {
 
     match index {
         Ok(i) => println!("La valeur 3 est à l'index : {}", i), // Affichage de l'index de la valeur 3.
-        Err(_) => println!("La valeur 3 n'est pas trouvée"), // Affichage si la valeur 3 n'est pas trouvée.
+        Err(_) => println!("La valeur 3 n'est pas trouvée"),
     }
 }
 ```
@@ -2517,6 +2527,8 @@ fn main() {
 - **contains_key** : renvoie vrai si le vecteur contient la clé spécifiée, sinon faux. (Note : Cette méthode est généralement utilisée avec les hashmaps, pas les vecteurs.)
 
 En Rust, la méthode `contains_key` est spécifique aux types de collections qui gèrent des paires clé-valeur, comme les `HashMap` ou les `BTreeMap`, et non aux vecteurs (`Vec<T>`). Les vecteurs ne possèdent pas de méthode `contains_key` car ils sont des collections indexées par des positions numériques, pas par des clés.
+
+- **HashMap** est un exemple de collection clé-valeur en Rust. Voici un exemple d'utilisation de la méthode `contains_key` avec une `HashMap` :
 
 ```rust
 use std::collections::HashMap;
@@ -2528,10 +2540,11 @@ fn main() {
 
     let contient = hashmap.contains_key("un"); // Vérification si la hashmap contient la clé "un".
 
-    println!("La hashmap contient la clé 'un' : {}", contient); // Affichage si la hashmap contient la clé "un" ou non.
+    // Affichage si la hashmap contient la clé "un" ou non
+    println!("La hashmap contient la clé 'un' : {}", contient);
 }
 ```
-
+Voyons un exemple concret d'utilisation de `HashMap` :
 ```rust
 use std::collections::HashMap;
 
@@ -2566,6 +2579,23 @@ Dans cet exemple :
 
 Ce que sont les HashMap et les BTreeMap, et comment les utiliser, sera abordé dans un autre chapitre.
 
+**BTreeMap** est une autre collection clé-valeur en Rust qui stocke les paires clé-valeur dans un arbre binaire de recherche équilibré. BTreeMap est similaire à HashMap, mais il stocke les paires clé-valeur dans un ordre trié en fonction de la clé. Voici un exemple d'utilisation de BTreeMap :
+
+```rust
+use std::collections::BTreeMap;
+
+fn main() {
+    let mut btreemap = BTreeMap::new(); // Création d'une nouvelle BTreeMap.
+    btreemap.insert("un", 1); // Ajout d'une paire clé-valeur à la BTreeMap.
+    btreemap.insert("deux", 2); // Ajout d'une autre paire clé-valeur à la BTreeMap.
+
+    let contient = btreemap.contains_key("un"); // Vérification si la BTreeMap contient la clé "un".
+
+    // Affichage si la BTreeMap contient la clé "un" ou non
+    println!("La BTreeMap contient la clé 'un' : {}", contient); 
+}
+```
+
 **Taille et Capacité**
 
 - **len** : renvoie le nombre d'éléments dans le vecteur.
@@ -2575,7 +2605,7 @@ fn main() {
     let vecteur = vec![1, 2, 3, 4, 5]; // Création d'un vecteur avec des valeurs.
     let taille = vecteur.len(); // Récupération de la taille du vecteur.
 
-    println!("La taille du vecteur est : {}", taille); // Affichage de la taille du vecteur.
+    println!("La taille du vecteur est : {}", taille); // Résultat : 5
 }
 ```
 
@@ -2586,7 +2616,7 @@ fn main() {
     let vecteur = vec![1, 2, 3, 4, 5]; // Création d'un vecteur avec des valeurs.
     let capacite = vecteur.capacity(); // Récupération de la capacité du vecteur.
 
-    println!("La capacité du vecteur est : {}", capacite); // Affichage de la capacité du vecteur.
+    println!("La capacité du vecteur est : {}", capacite); // Réultat : 5
 }
 ```
 
@@ -2597,7 +2627,7 @@ fn main() {
     let mut vecteur = vec![1, 2, 3, 4, 5]; // Création d'un vecteur avec des valeurs.
     vecteur.clear(); // Suppression de tous les éléments du vecteur.
 
-    println!("{:?}", vecteur); // Affichage du vecteur.
+    println!("{:?}", vecteur); // Réultat : []
 }
 ```
 
@@ -2607,10 +2637,10 @@ fn main() {
 
 ```rust
 fn main() {
-    let vecteur = vec![1, 2, 3, 4, 5]; // Création d'un vecteur avec des valeurs.
-    let tranche = vecteur.as_slice(); // Récupération d'une tranche contenant une vue sur les éléments du vecteur.
+    let vecteur = vec![1, 2, 3, 4, 5, 6, 7, 8]; // Création d'un vecteur avec des valeurs.
+    let tranche = vecteur.as_slice(4); // On récupère une tranche à partir de l'index 4.
 
-    println!("{:?}", tranche); // Affichage de la tranche.
+    println!("{:?}", tranche); // Réultat : [5, 6, 7, 8]
 }
 ```
 
@@ -2621,7 +2651,8 @@ fn main() {
     let vecteur = vec![1, 2, 3, 4, 5]; // Création d'un vecteur avec des valeurs.
     let pointeur = vecteur.as_ptr(); // Récupération du pointeur vers les éléments du vecteur.
 
-    println!("Le pointeur du vecteur est : {:?}", pointeur); // Affichage du pointeur du vecteur.
+  // Affiche l'adresse mémoire du pointeur du vecteur : 0x5a597be25c40
+  println!("Le pointeur du vecteur est : {:?}", pointeur); // Résultat : 0x5a597!be25c40
 }
 ```
 
@@ -2630,9 +2661,12 @@ fn main() {
 ```rust
 fn main() {
     let mut vecteur = vec![1, 2, 3, 4, 5]; // Création d'un vecteur avec des valeurs.
-    let pointeur_mutable = vecteur.as_mut_ptr(); // Récupération du pointeur mutable vers les éléments du vecteur.
 
-    println!("Le pointeur mutable du vecteur est : {:?}", pointeur_mutable); // Affichage du pointeur mutable du vecteur.
+    // Récupération du pointeur mutable vers les éléments du vecteur.
+    let pointeur_mutable = vecteur.as_mut_ptr();
+
+    // Affiche l'adresse mémoire du pointeur mutable du vecteur : 0x5f9be3efec60
+    println!("Le pointeur mutable du vecteur est : {:?}", pointeur_mutable); // Résultat : 0x5f9be3efec60
 }
 ```
 
@@ -2645,7 +2679,7 @@ fn main() {
     let mut vecteur = vec![1, 2, 3, 4, 5]; // Création d'un vecteur avec des valeurs.
     vecteur.swap(1, 3); // Échange des éléments aux index 1 et 3.
 
-    println!("{:?}", vecteur); // Affichage du vecteur.
+    println!("{:?}", vecteur); // Réultat : [1, 4, 3, 2, 5]
 }
 ```
 
@@ -2656,58 +2690,34 @@ fn main() {
     let mut vecteur = vec![1, 2, 3, 4, 5]; // Création d'un vecteur avec des valeurs.
     vecteur.retain(|&x| x % 2 == 0); // Conservation des éléments pairs.
 
-    println!("{:?}", vecteur); // Affichage du vecteur.
-}
-```
-
-- **drain_filter** : supprime et renvoie un itérateur sur les éléments du vecteur qui satisfont le prédicat spécifié.
-
-```rust
-fn main() {
-    let mut vecteur = vec![1, 2, 3, 4, 5]; // Création d'un vecteur avec des valeurs.
-    let mut iterateur = vecteur.drain_filter(|&x| x % 2 == 0); // Suppression des éléments pairs.
-
-    for element in iterateur { // Pour chaque élément de l'itérateur...
-        println!("L'élément supprimé est : {}", element); // Affichage de la valeur de l'élément supprimé.
-    }
+    println!("{:?}", vecteur); // Réultat : [2, 4]
 }
 ```
 
 **Division et Filtrage**
 
-- **split** : divise le vecteur en deux à l'index spécifié.
-
-```rust
-fn main() {
-    let vecteur = vec![1, 2, 3, 4, 5]; // Création d'un vecteur avec des valeurs.
-    let (gauche, droite) = vecteur.split_at(3); // Division du vecteur en deux à l'index 3.
-
-    println!("{:?}", gauche); // Affichage de la partie gauche du vecteur.
-    println!("{:?}", droite); // Affichage de la partie droite du vecteur.
-}
-```
-
 - **split_at** : divise le vecteur en deux à l'index spécifié.
 
 ```rust
 fn main() {
-    let vecteur = vec![1, 2, 3, 4, 5]; // Création d'un vecteur avec des valeurs.
-    let (gauche, droite) = vecteur.split_at(3); // Division du vecteur en deux à l'index 3.
+  let vecteur = vec![1, 2, 3, 4, 5]; // Création d'un vecteur avec des valeurs.
+  let (gauche, droite) = vecteur.split_at(3); // Division du vecteur en deux à l'index 3.
 
-    println!("{:?}", gauche); // Affichage de la partie gauche du vecteur.
-    println!("{:?}", droite); // Affichage de la partie droite du vecteur.
+  println!("{:?}", gauche); // Résultat : [1, 2, 3]
+  println!("{:?}", droite); // Résultat : [4, 5]
 }
 ```
-
 - **partition** : divise le vecteur en deux en fonction d'un prédicat.
 
 ```rust
 fn main() {
-    let vecteur = vec![1, 2, 3, 4, 5]; // Création d'un vecteur avec des valeurs.
-    let (pairs, impairs): (Vec<i32>, Vec<i32>) = vecteur.into_iter().partition(|&x| x % 2 == 0); // Division du vecteur en deux en fonction de la parité.
+  let vecteur = vec![1, 2, 3, 4, 5]; // Création d'un vecteur avec des valeurs.
 
-    println!("{:?}", pairs); // Affichage des éléments pairs du vecteur.
-    println!("{:?}", impairs); // Affichage des éléments impairs du vecteur.
+  // Division du vecteur en deux en fonction de la parité.
+  let (pairs, impairs): (Vec<i32>, Vec<i32>) = vecteur.into_iter().partition(|&x| x % 2 == 0);
+
+  println!("{:?}", pairs); // Résultat : [2, 4]
+  println!("{:?}", impairs); // Résultat : [1, 3, 5]
 }
 ```
 
@@ -2726,10 +2736,11 @@ Voyons les détails de ce code :
 
 ```rust
 fn main() {
-    let vecteur = vec!["un", "deux", "trois", "quatre", "cinq"]; // Création d'un vecteur avec des valeurs.
-    let chaine = vecteur.join(", "); // Concaténation des éléments du vecteur avec une chaîne séparatrice.
+  let vecteur = vec!["un", "deux", "trois", "quatre", "cinq"]; // Création d'un vecteur avec des valeurs.
 
-    println!("Le vecteur concaténé est : {}", chaine); // Affichage du vecteur concaténé.
+  // Concaténation des éléments du vecteur avec une chaîne séparatrice.
+  let chaine = vecteur.join(", ");
+  println!("Le vecteur concaténé est : {}", chaine); // Résultat : un, deux, trois, quatre, cinq
 }
 ```
 
@@ -2737,12 +2748,51 @@ fn main() {
 
 ```rust
 fn main() {
-    let vecteur = vec![1, 2, 3, 4, 5]; // Création d'un vecteur avec des valeurs.
-    let nombre_pairs = vecteur.iter().filter(|&x| x % 2 == 0).count(); // Comptage des éléments pairs.
+  let vecteur = vec![1, 2, 3, 4, 5]; // Création d'un vecteur avec des valeurs.
+  let nombre_pairs = vecteur.iter().filter(|&x| x % 2 == 0).count(); // Comptage des éléments pairs.
 
-    println!("Le nombre d'éléments pairs est : {}", nombre_pairs); // Affichage du nombre d'éléments pairs.
+  println!("Le nombre d'éléments pairs est : {}", nombre_pairs); // Résultat : 2
 }
 ```
+
+Voyons les détails de ce code :
+
+- `vecteur.iter()` : crée un itérateur sur les éléments du vecteur.
+- `filter()` : filtre les éléments du vecteur en fonction d'un prédicat. Cela permet de sélectionner uniquement les éléments qui satisfont le prédicat spécifié.
+- `filter(|&x| x % 2 == 0)` : filtre les éléments pairs du vecteur.
+- `|&x| x % 2 == 0 `: est une fermeture qui conserve uniquement les éléments pairs.
+- `| |` : est une fermeture sans arguments.
+- `|&x|` : est une fermeture qui prend un élément du vecteur.
+- `&x` : est une référence à l'élément du vecteur.
+- `x` : est l'élément du vecteur.
+- `x % 2` : est l'opération de modulo qui renvoie le reste de la division de x par 2.
+- `x % 2` == 0 : vérifie si le reste de la division de x par 2 est égal à zéro.
+- `count()` : compte le nombre d'éléments qui satisfont le prédicat spécifié.
+
+
+- **fold** : agrège les éléments du vecteur en appliquant une fonction d'agrégation.
+
+```rust
+fn main() {
+  let vecteur = vec![1, 2, 3, 4, 5]; // Création d'un vecteur avec des valeurs.
+  let somme = vecteur.iter().fold(0, |acc, &x| acc + x); // Somme des éléments du vecteur.
+
+  println!("La somme des éléments est : {}", somme); // Résultat : 15 (1 + 2 + 3 + 4 + 5)
+}
+```
+
+Voyons les détails de ce code :
+
+- - `let somme = vecteur.iter().fold(0, |acc, &x| acc + x);` : agrège les éléments du vecteur en calculant la somme.
+- - `vecteur.iter()` : crée un itérateur sur les éléments du vecteur.
+- - `fold(0, |acc, &x| acc + x)` : agrège les éléments du vecteur en calculant la somme.
+- - fold()` : agrège les éléments du vecteur en appliquant une fonction d'agrégation.
+- - `0` : est la valeur initiale de l'accumulateur.
+- - `|acc, &x| acc + x` : est une fonction d'agrégation qui ajoute l'élément `x` à l'accumulateur `acc`.
+- - `acc` : est l'accumulateur qui stocke le résultat de l'agrégation.
+- - `x` : est l'élément du vecteur.
+- - `acc + x` : ajoute l'élément `x` à l'accumulateur `acc`.
+- - `somme` : est le résultat de l'agrégation, c'est-à-dire la somme des éléments du vecteur.
 
 **Inspection et État de la Collection**
 
@@ -2756,13 +2806,6 @@ fn main() {
     println!("Le vecteur est vide : {}", est_vide); // Affichage si le vecteur est vide ou non.
 }
 ```
-
-Voyons les détails de ce code :
-
-- `|&x|` : est une fermeture qui prend un élément du vecteur.
-- `|&x| x % 2 == 0` : est une fermeture qui conserve uniquement les éléments pairs.
-- `retain` : est une méthode qui conserve uniquement les éléments qui satisfont le prédicat spécifié.
-- `println!("{:?}", vecteur);` : affiche le vecteur après avoir conservé uniquement les éléments pairs.
 
 Vous pouvez découvrir d'autres méthodes de manipulation des vecteurs dans la documentation officielle de Rust à cette adresse : [https://doc.rust-lang.org/std/vec/struct.Vec.html](https://doc.rust-lang.org/std/vec/struct.Vec.html)
 
@@ -2789,8 +2832,17 @@ fn main() {
 }
 ```
 
+Résultat du code :
+    
+```text
+Entrez votre nom :
+Paterne
+Bonjour, Paterne
+```
+
 Voyons les détails de ce code :
 
+- `use std::io;` : importe le module `std::io` pour la lecture de l'entrée.
 - `let mut nom = String::new();` : crée une nouvelle chaîne vide pour stocker le nom de l'utilisateur.
 - `io::stdin()` : renvoie un gestionnaire d'entrée pour la console.
 - `read_line()` : lit une ligne d'entrée à partir de la console et stocke le résultat dans la chaîne `nom`.
@@ -2838,6 +2890,23 @@ fn main() {
 }
 ```
 
+Résultat du code :
+
+```text
+Entrez le nom de l'utilisateur (ou 'fin' pour terminer) :
+Alice
+Entrez l'âge de l'utilisateur :
+25
+Entrez le nom de l'utilisateur (ou 'fin' pour terminer) :
+Bob
+Entrez l'âge de l'utilisateur :
+30
+Entrez le nom de l'utilisateur (ou 'fin' pour terminer) :
+fin
+Les noms des utilisateurs sont : ["Alice", "Bob"]
+Les âges des utilisateurs sont : [25, 30]
+```
+
 ## Gestion de projets avec Cargo
 
 Cargo est l'outil de gestion de paquets et de construction de projets de Rust. Il est utilisé pour créer, construire, tester et publier des projets Rust, ainsi que pour gérer les dépendances et les bibliothèques externes. Cargo facilite le développement de projets Rust en automatisant de nombreuses tâches courantes, telles que la gestion des dépendances, la compilation du code, l'exécution des tests et la génération de la documentation.
@@ -2877,11 +2946,21 @@ Dans cet exemple, la section `[dependencies]` spécifie les dépendances du proj
 
 ### Tests
 
+Les tests unitaires sont des fonctions qui vérifient le comportement d'une fonction ou d'un module dans un programme. Ils sont utilisés pour s'assurer que le code fonctionne correctement et pour détecter les erreurs ou les bogues potentiels.
+
+En Rust, les tests unitaires sont écrits à l'aide de la macro `#[test]` et peuvent être placés dans un fichier distinct ou dans le même fichier que le code qui est testé. Les tests unitaires sont exécutés par le compilateur Rust lors de la compilation du code et peuvent également être exécutés manuellement à l'aide de la commande `cargo test`.
+
 Les tests unitaires peuvent être écrits dans le fichier `src/main.rs` ou dans des fichiers séparés dans le répertoire `tests`. Voici un exemple de test unitaire dans le fichier `src/main.rs` :
 
 ```rust
 fn somme(a: i32, b: i32) -> i32 {
     a + b
+}
+
+fn main() {
+  println!("{}", somme(2, 2));
+  println!("{}", somme(1, 3));
+  println!("{}", somme(-1, 1));
 }
 
 #[cfg(test)]
@@ -2895,10 +2974,27 @@ mod tests {
         assert_eq!(somme(1, 3), 4);
         assert_eq!(somme(-1, 1), 0);
     }
+  
+    #[test]
+    fn test_somme_negatif() {
+        assert_eq!(somme(-2, -2), -4);
+        assert_eq!(somme(-1, -3), -4);
+        assert_eq!(somme(-1, 1), 0);
+    }
 }
 ```
 
-Dans cet exemple, la fonction `somme` est testée avec plusieurs cas de test à l'aide de la macro `#[test]`. Lorsque vous exécutez `cargo test`, Cargo exécute les tests unitaires et affiche les résultats.
+ Résultat du test unitaire :
+
+```text
+test tests::test_somme ... ok
+test tests::test_somme_negatif ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+```
+Dans ce code nous voyons que la fonction `somme` est testée avec plusieurs cas de test à l'aide de la macro `#[test]`. Lorsque vous exécutez `cargo test`, Cargo exécute les tests unitaires et affiche les résultats.
+
+Dans cet exemple, la fonction `somme` est testée avec plusieurs cas de test à l'aide de la macro `#[test]`. Lorsque vous exécutez `cargo test`, Cargo exécute les tests unitaires et affiche les résultats dans la console. Voir l'image ci-dessus pour le résultat du test unitaire.
 
 ### Documentation
 
@@ -2934,6 +3030,16 @@ fn main() {
         }
     }
 }
+```
+
+Résultat dans la console :
+
+```text
+Devinez le nombre secret entre 1 et 100.
+50
+Trop grand !
+25
+Trop petit !
 ```
 
 Analysons ce code en détail :
